@@ -9,7 +9,7 @@
    cd /frontend
    npm install
    # 下载完成之后即可使用
-   pnpm dev
+   npm run dev
    ```
 
 2. 为你的python环境安装一下包
