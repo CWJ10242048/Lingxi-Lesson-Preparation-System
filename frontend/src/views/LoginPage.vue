@@ -27,7 +27,6 @@ const imageUrl = "https://picsum.photos/800";
 </script>
 
 <template>
-  <!--  class="relative box-border h-[100vh] w-[100vw] bg-[var(--login)]"-->
   <div class="h-[100vh] w-[100vw] bg-[var(--login)]" data-theme="emerald">
     <div class="box">
       <div
