@@ -1,98 +1,120 @@
 <template>
-  <div>
+  <div class="home-page">
     <!-- 主界面 -->
-    <div class="header">
-      <img class="logo" src="../assets/images/v2_su8xbg.jpg" alt="lingxiTeach logo">
-      <div class="right-buttons">
-              <router-link to="/login" class="login-button">登录</router-link>
-              <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
+    <header class="header">
+      <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
+      <div class="header-buttons">
+        <router-link to="/login" class="login-button">登录</router-link>
+        <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
       </div>
-    </div>
-    <h1 class="title">Hi，我是灵犀智能备课助手</h1>
+    </header>
+
+    <h1 class="page-title">Hi，我是灵犀智能备课助手</h1>
+
     <div class="container">
-      <div class="side-bar">
-        <router-link to="/HomePage" class="nav-item"><i class="fas fa-history"></i>智能对话</router-link>
-        <router-link to="/HistoryPage" class="nav-item"><i class="fas fa-history"></i>输出历史</router-link>
-        <router-link to="/CollaborationSpace" class="nav-item"><i class="fas fa-history"></i>协作空间</router-link>
-        <div class="nav-item" id="personalCenterBtn"><i class="fas fa-user"></i>个人中心</div>
-      </div>
-      <div class="main-content">
-        <div class="main-row">
-          <div class="main-block">
+      <!-- 左侧导航栏 -->
+      <nav class="sidebar">
+        <router-link to="/HomePage" class="nav-item">
+          <i class="fas fa-history"></i>智能对话
+        </router-link>
+        <router-link to="/HistoryPage" class="nav-item">
+          <i class="fas fa-history"></i>输出历史
+        </router-link>
+        <router-link to="/CollaborationSpace" class="nav-item">
+          <i class="fas fa-users"></i>协作空间
+        </router-link>
+        <div class="nav-item">
+          <i class="fas fa-user"></i>个人中心
+        </div>
+      </nav>
+
+      <!-- 主内容区 -->
+      <main class="main-content">
+        <div class="row">
+          <!-- 教学助手 -->
+          <section class="card">
             <h2>教学助手</h2>
-            <div class="sub-functions">
-              <div class="function-button" @click="openLessonPlanModal">
+            <div class="features">
+              <div class="feature" @click="openLessonPlanModal">
                 <i class="fas fa-book" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/document-folder.svg" alt="教案生成" width="24" height="24">
                 教案生成
               </div>
-              <div class="function-button">
+              <div class="feature">
                 <i class="fas fa-lightbulb" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/every-user.svg" alt="灯泡图标" width="24" height="24">
                 互动环节设计
               </div>
             </div>
-          </div>
-          <div class="main-block">
+          </section>
+
+          <!-- 备课中心 -->
+          <section class="card">
             <h2>备课中心</h2>
-            <div class="sub-functions">
-              <div class="function-button" @click="openPPTGenerateModal">
+            <div class="features">
+              <div class="feature" @click="openPPTGenerateModal">
                 <i class="fas fa-file-powerpoint" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/ppt.svg" alt="幻灯片带文字的图标" width="24" height="24">
                 PPT生成
               </div>
-              <div class="function-button">
+              <div class="feature">
                 <i class="fas fa-image" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/picture.svg" alt="相机图标" width="24" height="24">
                 图文生成
               </div>
-              <div class="function-button">
+              <div class="feature">
                 <i class="fas fa-question-circle" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/view-grid-detail.svg" alt="一叠纸的图标" width="24" height="24">
-                <router-link to="/index" >智能出题</router-link>
+                智能出题
               </div>
             </div>
-          </div>
+          </section>
         </div>
-        <div class="main-row">
-          <div class="main-block">
+
+        <div class="row">
+          <!-- 学情分析 -->
+          <section class="card">
             <h2>学情分析</h2>
-            <div class="sub-functions">
-              <div class="function-button">
+            <div class="features">
+              <div class="feature">
                 <i class="fas fa-chart-bar" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/data-file.svg" alt="带图表的人的图标" width="24" height="24">
                 学生数据看板
               </div>
-              <div class="function-button">
+              <div class="feature">
                 <i class="fas fa-eye" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/woman.svg" alt="眼睛图标" width="24" height="24">
                 认知诊断
               </div>
             </div>
-          </div>
-          <div class="main-block">
+          </section>
+
+          <!-- 资源库 -->
+          <section class="card">
             <h2>资源库</h2>
-            <div class="sub-functions">
-              <div class="function-button">
+            <div class="features">
+              <div class="feature">
                 <i class="fas fa-project-diagram" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/mind-mapping.svg" alt="带线的三角形图标" width="24" height="24">
                 知识图谱
               </div>
-              <div class="function-button">
+              <div class="feature">
                 <i class="fas fa-users" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/message-search.svg" alt="三个人的图标（不同）" width="24" height="24">
                 资源社区
               </div>
-              <div class="function-button">
+              <div class="feature">
                 <i class="fas fa-heart" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/helpcenter.svg" alt="带眼睛的心形图标" width="24" height="24">
                 敬请期待
               </div>
             </div>
-          </div>
+          </section>
         </div>
-      </div>
+      </main>
     </div>
+
+    <!-- 输入区域 -->
     <div class="input-area">
       <input type="text" class="input-field" placeholder="输入...">
       <div class="input-icons">
@@ -100,96 +122,62 @@
         <i class="fas fa-arrow-right"></i>
       </div>
     </div>
+
     <!-- 教案生成浮层 -->
-    <div class="modal-overlay" :style="{ display: showLessonPlanModal ? 'flex' : 'none' }" id="lessonPlanModal">
+    <div class="modal" v-if="showLessonPlanModal">
       <div class="modal-container">
         <div class="modal-header">
-          <div class="modal-title">教学方案</div>
-          <div class="modal-close" @click="closeLessonPlanModal">&times;</div>
+          <h3>教学方案</h3>
+          <button class="close-btn" @click="closeLessonPlanModal">&times;</button>
         </div>
         <div class="modal-content">
-          <div class="form-container">
-            <p class="subtitle">智能生成一份教案</p>
-            <form id="teachingPlanForm">
-              <div class="form-group">
-                <label for="courseName" class="required">课程名称</label>
-                <input type="text" id="courseName" name="courseName" placeholder="请输入" required>
-              </div>
-              <div class="form-group">
-                <label for="totalHours" class="required">总学时</label>
-                <input type="number" id="totalHours" name="totalHours" placeholder="请输入" required>
-              </div>
-              <div class="form-group">
-                <label for="major" class="required">适用专业</label>
-                <input type="text" id="major" name="major" placeholder="请输入" required>
-              </div>
-              <div class="form-group">
-                <label for="courseType" class="required">课程性质</label>
-                <select id="courseType" name="courseType" required>
-                  <option value="" disabled selected>请选择</option>
-                  <option value="必修课">必修课</option>
-                  <option value="选修课">选修课</option>
-                  <option value="公共课">公共课</option>
-                  <option value="专业课">专业课</option>
-                  <option value="实践课">实践课</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="textbook">参考教材</label>
-                <input type="file" id="textbook" name="textbook" class="file-upload">
-                <span id="fileStatus">未选择文件</span>
-              </div>
-              <div class="form-group">
-                <label for="requirements">其他要求</label>
-                <textarea id="requirements" name="requirements" rows="3" placeholder="请输入"></textarea>
-              </div>
-              <button type="submit" class="generate-btn">生成</button>
-            </form>
-          </div>
+          <p class="subtitle">智能生成一份教案</p>
+          <form @submit.prevent="generateLessonPlan">
+            <div class="form-group">
+              <label for="courseName">课程名称</label>
+              <input type="text" id="courseName" required>
+            </div>
+            <div class="form-group">
+              <label for="totalHours">总学时</label>
+              <input type="number" id="totalHours" required>
+            </div>
+            <div class="form-group">
+              <label for="major">适用专业</label>
+              <input type="text" id="major" required>
+            </div>
+            <div class="form-group">
+              <label for="courseType">课程性质</label>
+              <select id="courseType" required>
+                <option value="必修课">必修课</option>
+                <option value="选修课">选修课</option>
+              </select>
+            </div>
+            <button class="generate-btn">生成</button>
+          </form>
         </div>
       </div>
     </div>
+
     <!-- PPT 生成浮层 -->
-    <div class="modal-overlay" :style="{ display: showPPTGenerateModal ? 'flex' : 'none' }" id="pptGenerateModal">
+    <div class="modal" v-if="showPPTGenerateModal">
       <div class="modal-container">
         <div class="modal-header">
-          <div class="modal-title">PPT 生成</div>
-          <div class="modal-close" @click="closePPTGenerateModal">&times;</div>
+          <h3>PPT 生成</h3>
+          <button class="close-btn" @click="closePPTGenerateModal">&times;</button>
         </div>
         <div class="modal-content">
-          <div class="form-container">
-            <p class="subtitle">智能生成一份PPT</p>
-            <form id="pptGenerateForm">
-              <div class="form-group">
-                <label for="pptCourseName" class="required">课程名称</label>
-                <input type="text" id="pptCourseName" name="pptCourseName" placeholder="请输入" required>
-              </div>
-              <div class="form-group">
-                <label for="pptSections" class="required">节数</label>
-                <input type="number" id="pptSections" name="pptSections" placeholder="请输入" required>
-              </div>
-              <div class="form-group">
-                <label for="classHours">本课时学时（每学时40分钟）</label>
-                <input type="number" id="classHours" name="classHours" placeholder="请输入">
-              </div>
-              <div class="divider"></div>
-              <div class="form-group">
-                <label for="pptMajor">适用专业</label>
-                <input type="text" id="pptMajor" name="pptMajor" placeholder="请输入">
-              </div>
-              <div class="divider"></div>
-              <div class="form-group">
-                <label for="pptTextbook">参考教材</label>
-                <input type="file" id="pptTextbook" name="pptTextbook" class="file-upload">
-                <span id="pptFileStatus">未选择文件</span>
-              </div>
-              <div class="form-group">
-                <label for="pptRequirements">其他要求</label>
-                <textarea id="pptRequirements" name="pptRequirements" rows="3" placeholder="请输入"></textarea>
-              </div>
-              <button type="submit" class="generate-btn">生成</button>
-            </form>
-          </div>
+          <p class="subtitle">智能生成一份PPT</p>
+          <form @submit.prevent="generatePPT">
+            <div class="form-group">
+              <label for="pptCourseName">课程名称</label>
+              <input type="text" id="pptCourseName" required>
+            </div>
+            <div class="form-group">
+              <label for="pptSections">节数</label>
+              <input type="number" id="pptSections" required>
+            </div>
+            <button class="generate-btn">生成</button>
+          </form>
         </div>
       </div>
     </div>
@@ -217,281 +205,278 @@ export default {
     },
     closePPTGenerateModal() {
       this.showPPTGenerateModal = false;
+    },
+    generateLessonPlan() {
+      alert('教案生成');
+      this.closeLessonPlanModal();
+    },
+    generatePPT() {
+      alert('PPT生成');
+      this.closePPTGenerateModal();
     }
   }
 };
 </script>
 
 <style scoped>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-  color: #333;
+.home-page {
+  font-family: 'Helvetica Neue', sans-serif;
+  background: url('../assets/images/蓝背景板.png') no-repeat center center fixed;
+  background-size: cover;
   height: 100vh;
   overflow: hidden;
+  opacity: 0.85; /* 控制背景图片透明度 */
 }
-/* 主界面样式 */
-.header {
+
+
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 30px;
+  background: #FAF0E6; /* 柔和的亚麻色背景 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* 调整阴影 */
 }
 
 .logo {
-  width: 150px; /* 根据实际需求调整 */
-  height: auto;
+  width: 150px;
 }
 
-/* 新增 right-buttons 类的样式 */
-.right-buttons {
+.header-buttons {
   display: flex;
-  margin-left: auto; /* 将按钮组推到最右侧 */
+  align-items: center;
 }
 
-/* 调整登录按钮和新对话按钮之间的间距 */
-.login-button {
-  background-color: white;
-  color: #2196F3;
-  padding: 8px 15px;
-  border: 1px solid #2196F3;
-  border-radius: 5px;
+.login-button, .new-conversation {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 30px;
+  background-color: #BFAE9F; /* 柔和的棕褐色 */
+  color: white;
+  border: none;
   cursor: pointer;
   font-size: 14px;
-  margin-right: 10px;
-  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-.new-conversation {
-  background-color: white;
-  color: #2196F3;
-  padding: 8px 15px;
-  border: 1px solid #2196F3;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+.login-button:hover, .new-conversation:hover {
+  background-color: #A9A194; /* 悬停时颜色加深 */
 }
-.title {
+
+.page-title {
   text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  margin: 20px 0;
-  color: black;
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 20px;
 }
+
 .container {
   display: flex;
-  gap: 20px;
-  height: calc(100vh - 150px);
-  padding: 0 20px;
+  justify-content: center; /* 改为居中 */
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  width: calc(100% - 160px); /* 减去侧边栏宽度 */
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 160px; /* 与侧边栏宽度一致 */
 }
-.side-bar {
-  width: 200px;
-  background-color: white;
-  padding: 15px;
+
+/* 保证侧边栏固定位置，不会影响中央的内容 */
+.sidebar {
+  width: 160px; /* 恢复侧边栏宽度 */
+  background-color: rgba(207, 207, 207, 0.7);
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 80px;
+  left: 0;
+  height: calc(100vh - 80px);
 }
+
 .nav-item {
+  padding: 12px;
   display: flex;
   align-items: center;
-  padding: 12px 10px;
-  color: #2196F3;
-  margin-bottom: 8px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  justify-content: center; /* 添加水平居中 */
+  margin-bottom: 10px;
+  color: #0D47A1; /* 变深的蓝色 */
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  text-align: center; /* 确保文字居中 */
+  width: 100%; /* 确保占满整个宽度 */
+  font-size: 22px; /* 增大字体大小 */
 }
+
 .nav-item:hover {
-  background-color: #f0f7ff;
+  background-color: #e0f7fa;
 }
-.nav-item i {
-  margin-right: 10px;
-  width: 20px;
-  text-align: center;
-}
+
 .main-content {
-  flex-grow: 1;
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
-.main-row {
+
+.row {
   display: flex;
   gap: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  justify-content: center; /* 让卡片居中 */
+  width: 100%;
 }
-.main-block {
-  flex-grow: 1;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
+
+.card {
+  flex: 0 0 auto;
+  width: 320px; /* 缩小卡片宽度 */
+  height: 250px; /* 缩小卡片高度 */
+  background-color: rgba(245, 230, 224, 0.7); /* 提高透明度 (alpha 0.7) */
+  padding: 20px; /* 调整内边距 */
+  border-radius: 12px; /* 调整圆角 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 调整阴影 */
+  margin: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加阴影过渡 */
 }
-.main-block h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #333;
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* 悬停时增强阴影 */
 }
-.sub-functions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+
+.card h2 {
+  font-size: 22px; /* 进一步缩小标题字号 */
+  font-weight: 600;
+  margin-bottom: 15px; /* 减少下边距 */
+  color: #8B5A5A;
 }
-.function-button {
-  border: 1px solid #2196F3;
-  padding: 12px;
-  border-radius: 5px;
+
+.feature {
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: rgba(248, 240, 237, 0.8); /* 可选：同步透明度 */
+  padding: 12px; /* 减少内边距 */
+  text-align: center;
+  border-radius: 10px; /* 调整圆角 */
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: transform 0.3s, background-color 0.3s;
+  gap: 10px; /* 减少图标与文本间距 */
+  width: 100%;
+  margin-bottom: 10px; /* 减少下边距 */
+  font-size: 14px; /* 减小字体大小 */
 }
-.function-button:hover {
-  background-color: #f0f7ff;
+
+.feature:hover {
+  transform: translateY(-3px);
+  background-color: #F5E6E0;
 }
-.function-button img {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
+
+.feature i, .feature img {
+  width: 20px; /* 缩小图标尺寸 */
+  height: 20px; /* 缩小图标尺寸 */
 }
+
 .input-area {
-  margin: 20px;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FAF0E6; /* 与顶部栏一致的柔和背景 */
+  padding: 15px;
+  width: 80%;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 调整阴影 */
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background-color: white;
 }
+
 .input-field {
-  flex-grow: 1;
-  border: none;
-  outline: none;
-  padding: 8px;
-  font-size: 14px;
+  width: 85%;
+  padding: 10px 15px; /* 调整内边距 */
+  border: 1px solid #D3C1B8; /* 柔和的边框色 */
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: rgb(242, 220, 220); /* 保持输入框内部白色 */
 }
+
 .input-icons i {
-  margin-left: 15px;
+  color: #BFAE9F; /* 与按钮颜色一致 */
   cursor: pointer;
-  color: #666;
+  margin-left: 10px;
 }
-/* 浮层样式 */
-.modal-overlay {
+
+/* Modal Styles */
+.modal {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
+
 .modal-container {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: modalFadeIn 0.3s;
 }
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-}
-.modal-title {
   font-size: 20px;
   font-weight: bold;
-  color: #333;
 }
-.modal-close {
+
+.close-btn {
+  background: none;
+  border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #999;
 }
-.modal-content {
-  padding: 20px;
-}
-/* 表单样式 */
-.form-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-}
-.form-group {
+
+.subtitle {
+  color: #666;
+  text-align: center;
   margin-bottom: 20px;
 }
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #555;
+
+.form-group {
+  margin-bottom: 15px;
 }
-.required:after {
-  content: " *";
-  color: red;
-}
-input[type="text"],
-input[type="number"],
-textarea,
-select {
+
+input[type="text"], input[type="number"], select {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
+  border-radius: 8px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  box-sizing: border-box;
 }
-.file-upload {
-  margin-top: 5px;
-}
-.generate-btn {
+
+button.generate-btn {
   background-color: #2196F3;
   color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 4px;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
   width: 100%;
   transition: background-color 0.3s;
 }
-.generate-btn:hover {
+
+button.generate-btn:hover {
   background-color: #0b7dda;
-}
-.subtitle {
-  text-align: center;
-  color: #666;
-  margin-bottom: 20px;
-  font-size: 16px;
-}
-/* 分割线样式 */
-.divider {
-  border-top: 1px solid #eee;
-  margin: 15px 0;
 }
 </style>

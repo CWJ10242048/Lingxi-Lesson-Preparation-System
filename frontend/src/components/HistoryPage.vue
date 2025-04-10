@@ -1,51 +1,62 @@
 <template>
-  <div>
+  <div class="home-page">
     <!-- 主界面 -->
-    <div class="header">
-      <img class="logo" src="../assets/images/v2_su8xbg.jpg" alt="lingxiTeach logo">
-      <div class="right-buttons">
-              <router-link to="/login" class="login-button">登录</router-link>
-              <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
+    <header class="header">
+      <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
+      <div class="header-buttons">
+        <router-link to="/login" class="login-button">登录</router-link>
+        <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
       </div>
-    </div>
-
-    <h1 class="title">Hi，我是灵犀智能备课助手</h1>
+    </header>
 
     <div class="container">
-      <div class="side-bar">
-        <router-link to="/HomePage" class="nav-item"><i class="fas fa-history"></i>智能对话</router-link>
-        <router-link to="/HistoryPage" class="nav-item"><i class="fas fa-history"></i>输出历史</router-link>
-        <router-link to="/CollaborationSpace" class="nav-item"><i class="fas fa-history"></i>协作空间</router-link>
-        <div class="nav-item" id="personalCenterBtn"><i class="fas fa-user"></i>个人中心</div>
-      </div>
+      <!-- 左侧导航栏 -->
+      <nav class="sidebar">
+        <router-link to="/HomePage" class="nav-item">
+          <i class="fas fa-history"></i>智能对话
+        </router-link>
+        <router-link to="/HistoryPage" class="nav-item">
+          <i class="fas fa-history"></i>输出历史
+        </router-link>
+        <router-link to="/CollaborationSpace" class="nav-item">
+          <i class="fas fa-users"></i>协作空间
+        </router-link>
+        <div class="nav-item">
+          <i class="fas fa-user"></i>个人中心
+        </div>
+      </nav>
 
-      <div class="main-content" id="historyContent" v-show="showHistory">
-        <h1 class="page-title">输出历史</h1>
-        <div class="section-divider"></div>
-
-        <table class="history-table">
-          <thead>
-            <tr>
-              <th>内容</th>
-              <th>工具</th>
-              <th>更新时间</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>线性回归PPT</td>
-              <td>PPT生成</td>
-              <td>2024/4/6 8:34</td>
-              <td class="action-buttons">
-                <span class="action-btn delete-btn">删除</span>
-                <span class="action-btn export-btn">导出</span>
-              </td>
-            </tr>
-            <!-- 可以添加更多历史记录行 -->
-          </tbody>
-        </table>
-      </div>
+      <!-- 主内容区 -->
+      <main class="main-content">
+        <div class="row">
+          <!-- 输出历史 -->
+          <section class="card" >
+            <h2>输出历史</h2>
+            <div class="section-divider"></div>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>内容</th>
+                  <th>工具</th>
+                  <th>更新时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>线性回归PPT</td>
+                  <td>PPT生成</td>
+                  <td>2024/4/6 8:34</td>
+                  <td class="action-buttons">
+                    <span class="action-btn delete-btn">删除</span>
+                    <span class="action-btn export-btn">导出</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+      </main>
     </div>
   </div>
 </template>
@@ -55,338 +66,166 @@ export default {
   name: 'HistoryPage',
   data() {
     return {
-      showMain: true,
-      showHistory: false
+      showLessonPlanModal: false,
+      showPPTGenerateModal: false
     };
   },
   methods: {
-    showMainFunctions() {
-      this.showMain = true;
-      this.showHistory = false;
+    openLessonPlanModal() {
+      this.showLessonPlanModal = true;
     },
-    showHistoryContent() {
-      this.showMain = false;
-      this.showHistory = true;
+    closeLessonPlanModal() {
+      this.showLessonPlanModal = false;
+    },
+    openPPTGenerateModal() {
+      this.showPPTGenerateModal = true;
+    },
+    closePPTGenerateModal() {
+      this.showPPTGenerateModal = false;
+    },
+    generateLessonPlan() {
+      alert('教案生成');
+      this.closeLessonPlanModal();
+    },
+    generatePPT() {
+      alert('PPT生成');
+      this.closePPTGenerateModal();
     }
-  },
-  mounted() {
-    this.showHistoryContent();
   }
 };
 </script>
 
 <style scoped>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-  color: #333;
+.home-page {
+  font-family: 'Helvetica Neue', sans-serif;
+  background: url('../assets/images/蓝背景板.png') no-repeat center center fixed;
+  background-size: cover;
   height: 100vh;
   overflow: hidden;
+  opacity: 0.85; /* 控制背景图片透明度 */
 }
 
-/* 主界面样式 */
-.header {
+
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 30px;
+  background: #FAF0E6; /* 柔和的亚麻色背景 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* 调整阴影 */
 }
 
 .logo {
-  width: 150px; /* 根据实际需求调整 */
-  height: auto;
+  width: 150px;
 }
 
-/* 新增 right-buttons 类的样式 */
-.right-buttons {
+.header-buttons {
   display: flex;
-  margin-left: auto; /* 将按钮组推到最右侧 */
+  align-items: center;
 }
 
-/* 调整登录按钮和新对话按钮之间的间距 */
-.login-button {
-  background-color: white;
-  color: #2196F3;
-  padding: 8px 15px;
-  border: 1px solid #2196F3;
-  border-radius: 5px;
+.login-button, .new-conversation {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 30px;
+  background-color: #BFAE9F; /* 柔和的棕褐色 */
+  color: white;
+  border: none;
   cursor: pointer;
   font-size: 14px;
-  margin-right: 10px;
-  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-.new-conversation {
-  background-color: white;
-  color: #2196F3;
-  padding: 8px 15px;
-  border: 1px solid #2196F3;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.title {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  margin: 20px 0;
-  color: black;
+.login-button:hover, .new-conversation:hover {
+  background-color: #A9A194; /* 悬停时颜色加深 */
 }
 
 .container {
   display: flex;
-  gap: 20px;
-  height: calc(100vh - 150px);
-  padding: 0 20px;
+  justify-content: center; /* 改为居中 */
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  width: calc(100% - 160px); /* 减去侧边栏宽度 */
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 160px; /* 与侧边栏宽度一致 */
 }
 
-.side-bar {
-  width: 200px;
-  background-color: white;
-  padding: 15px;
+/* 保证侧边栏固定位置，不会影响中央的内容 */
+.sidebar {
+  width: 160px; /* 恢复侧边栏宽度 */
+  background-color: rgba(207, 207, 207, 0.7);
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 80px;
+  left: 0;
+  height: calc(100vh - 80px);
 }
 
 .nav-item {
+  padding: 12px;
   display: flex;
   align-items: center;
-  padding: 12px 10px;
-  color: #2196F3;
-  margin-bottom: 8px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  justify-content: center; /* 添加水平居中 */
+  margin-bottom: 10px;
+  color: #0D47A1; /* 变深的蓝色 */
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  text-align: center; /* 确保文字居中 */
+  width: 100%; /* 确保占满整个宽度 */
+  font-size: 22px; /* 增大字体大小 */
 }
 
 .nav-item:hover {
-  background-color: #f0f7ff;
-}
-
-.nav-item i {
-  margin-right: 10px;
-  width: 20px;
-  text-align: center;
+  background-color: #e0f7fa;
 }
 
 .main-content {
-  flex-grow: 1;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  justify-content: center; /* 让卡片居中 */
+  width: 100%;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: 90%; /* 缩小卡片宽度 */
+  background-color: rgba(245, 230, 224, 0.7); /* 提高透明度 (alpha 0.7) */
+  padding: 20px; /* 调整内边距 */
+  border-radius: 12px; /* 调整圆角 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 调整阴影 */
+  margin: 15px;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加阴影过渡 */
 }
 
-.main-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* 悬停时增强阴影 */
 }
 
-.main-block {
-  flex-grow: 1;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
+.card h2 {
+  font-size: 22px; /* 进一步缩小标题字号 */
+  font-weight: 600;
+  margin-bottom: 15px; /* 减少下边距 */
+  color: #8B5A5A;
+  text-align: left;
 }
 
-.main-block h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.sub-functions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.function-button {
-  border: 1px solid #2196F3;
-  padding: 12px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  background-color: white;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.function-button:hover {
-  background-color: #f0f7ff;
-}
-
-.function-button img {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-}
-
-.input-area {
-  margin: 20px;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-}
-
-.input-field {
-  flex-grow: 1;
-  border: none;
-  outline: none;
-  padding: 8px;
-  font-size: 14px;
-}
-
-.input-icons i {
-  margin-left: 15px;
-  cursor: pointer;
-  color: #666;
-}
-
-/* 浮层样式 */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-container {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: modalFadeIn 0.3s;
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.modal-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-}
-
-.modal-close {
-  font-size: 24px;
-  cursor: pointer;
-  color: #999;
-}
-
-.modal-content {
-  padding: 20px;
-}
-
-/* 表单样式 */
-.form-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #555;
-}
-
-.required:after {
-  content: " *";
-  color: red;
-}
-
-input[type="text"],
-input[type="number"],
-textarea,
-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.file-upload {
-  margin-top: 5px;
-}
-
-.generate-btn {
-  background-color: #2196F3;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s;
-}
-
-.generate-btn:hover {
-  background-color: #0b7dda;
-}
-
-.subtitle {
-  text-align: center;
-  color: #666;
-  margin-bottom: 20px;
-  font-size: 16px;
-}
-
-/* 分割线样式 */
-.divider {
-  border-top: 1px solid #eee;
-  margin: 15px 0;
-}
-
-/* 历史记录表格样式 */
 .history-table {
   width: 100%;
   border-collapse: collapse;
@@ -425,15 +264,6 @@ select {
   text-decoration: underline;
 }
 
-/* 页面标题样式 */
-.page-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-/* 分割线样式 */
 .section-divider {
   border-top: 1px solid #eee;
   margin: 15px 0;
