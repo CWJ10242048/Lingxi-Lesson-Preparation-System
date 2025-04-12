@@ -40,7 +40,7 @@
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/document-folder.svg" alt="教案生成" width="24" height="24">
                 教案生成
               </div>
-              <div class="feature" @click="openLessonPlanModal">
+              <div class="feature" @click="navigateToSyllabusGeneration">
                 <i class="fas fa-book" style="color: #2196F3;"></i>
                 <img src="" alt="" width="24" height="24">
                 教学大纲生成
@@ -62,12 +62,12 @@
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/ppt.svg" alt="幻灯片带文字的图标" width="24" height="24">
                 PPT生成
               </div>
-              <div class="feature">
+              <div class="feature" @click="navigateToImageGeneration">
                 <i class="fas fa-image" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/picture.svg" alt="相机图标" width="24" height="24">
                 图文生成
               </div>
-              <div class="feature">
+              <div class="feature" @click="navigateToQuestionGeneration">
                 <i class="fas fa-question-circle" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/view-grid-detail.svg" alt="一叠纸的图标" width="24" height="24">
                 智能出题
@@ -205,13 +205,13 @@ export default {
   },
   methods: {
     openLessonPlanModal() {
-      this.showLessonPlanModal = true;
+      this.$router.push('/LessonPlanGeneration');
     },
     closeLessonPlanModal() {
       this.showLessonPlanModal = false;
     },
     openPPTGenerateModal() {
-      this.showPPTGenerateModal = true;
+      this.$router.push('/PPTGeneration');
     },
     closePPTGenerateModal() {
       this.showPPTGenerateModal = false;
@@ -223,6 +223,15 @@ export default {
     generatePPT() {
       alert('PPT生成');
       this.closePPTGenerateModal();
+    },
+    navigateToSyllabusGeneration() {
+      this.$router.push('/SyllabusGeneration');
+    },
+    navigateToImageGeneration() {
+      this.$router.push('/ImageGeneration');
+    },
+    navigateToQuestionGeneration() {
+      this.$router.push('/QuestionGeneration');
     }
   }
 };
@@ -300,7 +309,7 @@ header {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 80px;
+  top: 100px;
   left: 0;
   height: calc(100vh - 80px);
 }

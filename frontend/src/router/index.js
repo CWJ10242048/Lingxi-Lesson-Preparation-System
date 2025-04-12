@@ -37,6 +37,14 @@ const router = createRouter({
 			},
 		},
         {
+            path: "/SyllabusGeneration",
+            name: "SyllabusGeneration",
+            component: () => import('../views/SyllabusGeneration.vue'),
+            meta: {
+                title: "Ling Xi | 教学大纲生成", // 定义标题
+            },
+        },
+        {
             path: "/index",
             name: "index",
             component: () => import('../views/WholeExamPage.vue').catch((error) => {
@@ -66,6 +74,38 @@ const router = createRouter({
                 title: "Ling Xi | 智能备课助手", // 定义标题
             },
         },
+        {
+            path: '/LessonPlanGeneration',
+            name: 'LessonPlanGeneration',
+            component: () => import('../views/LessonPlanGeneration.vue'),
+            meta: {
+                title: 'Ling Xi | 教案生成'
+            }
+        },
+        {
+            path: '/PPTGeneration',
+            name: 'PPTGeneration',
+            component: () => import('../views/PPTGeneration.vue'),
+            meta: {
+                title: 'Ling Xi | PPT生成'
+            }
+        },
+        {
+            path: '/ImageGeneration',
+            name: 'ImageGeneration',
+            component: () => import('../views/ImageGeneration.vue'),
+            meta: {
+                title: 'Ling Xi | 图文生成'
+            }
+        },
+        {
+            path: '/QuestionGeneration',
+            name: 'QuestionGeneration',
+            component: () => import('../views/QuestionGeneration.vue'),
+            meta: {
+                title: 'Ling Xi | 智能出题'
+            }
+        }
     ],
 });
 
