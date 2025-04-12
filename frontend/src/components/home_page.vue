@@ -40,6 +40,11 @@
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/document-folder.svg" alt="教案生成" width="24" height="24">
                 教案生成
               </div>
+              <div class="feature" @click="openLessonPlanModal">
+                <i class="fas fa-book" style="color: #2196F3;"></i>
+                <img src="" alt="" width="24" height="24">
+                教学大纲生成
+              </div>
               <div class="feature">
                 <i class="fas fa-lightbulb" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/every-user.svg" alt="灯泡图标" width="24" height="24">
@@ -86,6 +91,11 @@
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/woman.svg" alt="眼睛图标" width="24" height="24">
                 认知诊断
               </div>
+              <div class="feature">
+                <i class="fas fa-eye" style="color: #2196F3;"></i>
+                <img src="" alt="" width="24" height="24">
+                知识追踪
+              </div>
             </div>
           </section>
 
@@ -105,8 +115,8 @@
               </div>
               <div class="feature">
                 <i class="fas fa-heart" style="color: #2196F3;"></i>
-                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/helpcenter.svg" alt="带眼睛的心形图标" width="24" height="24">
-                敬请期待
+                <img src="" alt="" width="24" height="24">
+                概念先决识别
               </div>
             </div>
           </section>
