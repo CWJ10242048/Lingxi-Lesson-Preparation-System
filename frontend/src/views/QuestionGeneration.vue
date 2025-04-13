@@ -4,14 +4,14 @@
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
         <router-link to="/login" class="login-button">登录</router-link>
-        <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
+        <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
     </header>
 
     <div class="container">
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
-          <i class="fas fa-history"></i>智能对话
+          <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
           <i class="fas fa-history"></i>输出历史
@@ -160,6 +160,7 @@ export default {
   background: url('../assets/images/蓝背景板.png') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
+  overflow-y: auto;
   opacity: 0.85;
 }
 
@@ -168,17 +169,44 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: #FAF0E6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #E3F2FD;
+  box-shadow: 0 2px 8px rgba(32, 90, 177, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo {
   width: 150px;
 }
 
+.header-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.login-button, .new-conversation {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 30px;
+  background-color: #BFAE9F;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover, .new-conversation:hover {
+  background-color: #A9A194;
+}
+
 .container {
   display: flex;
-  padding: 20px;
+  margin-top: 50px;
+  padding-bottom: 50px;
 }
 
 .sidebar {
@@ -187,17 +215,25 @@ export default {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 80px;
+  left: 10px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
 }
 
 .nav-item {
   padding: 12px;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-bottom: 10px;
   color: #0D47A1;
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.3s;
+  text-align: center;
+  width: 100%;
   font-size: 22px;
 }
 
@@ -208,7 +244,10 @@ export default {
 .main-content {
   flex: 1;
   padding: 20px;
-  margin-left: 20px;
+  margin-left: 150px;
+  margin-top: 60px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
 }
 
 .page-title {
@@ -216,7 +255,7 @@ export default {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 30px;
-  color: #333;
+  margin-top: -20px;
 }
 
 .form-container {

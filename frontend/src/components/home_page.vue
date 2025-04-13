@@ -5,7 +5,7 @@
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
         <router-link to="/login" class="login-button">登录</router-link>
-        <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
+        <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
     </header>
 
@@ -15,7 +15,7 @@
       <!-- 左侧导航栏 -->
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
-          <i class="fas fa-history"></i>智能对话
+          <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
           <i class="fas fa-history"></i>输出历史
@@ -42,7 +42,7 @@
               </div>
               <div class="feature" @click="navigateToSyllabusGeneration">
                 <i class="fas fa-book" style="color: #2196F3;"></i>
-                <img src="" alt="" width="24" height="24">
+                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/doc-detail.svg" alt="教学大纲生成" width="24" height="24">
                 教学大纲生成
               </div>
               <div class="feature" @click="navigateToInteractionDesign">
@@ -93,7 +93,7 @@
               </div>
               <div class="feature" @click="navigateToKnowledgeTracking">
                 <i class="fas fa-eye" style="color: #2196F3;"></i>
-                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/mind-mapping.svg" alt="知识追踪图标" width="24" height="24">
+                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/audio-file.svg" alt="知识追踪图标" width="24" height="24">
                 知识追踪
               </div>
             </div>
@@ -116,22 +116,13 @@
               </div>
               <div class="feature" @click="navigateToConceptPrerequisite">
                 <i class="fas fa-heart" style="color: #2196F3;"></i>
-                <img src="" alt="" width="24" height="24">
+                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/file-editing-one.svg" alt="概念先决识别" width="24" height="24">
                 概念先决识别
               </div>
             </div>
           </section>
         </div>
       </main>
-    </div>
-
-    <!-- 输入区域 -->
-    <div class="input-area">
-      <input type="text" class="input-field" placeholder="输入...">
-      <div class="input-icons">
-        <i class="fas fa-paperclip"></i>
-        <i class="fas fa-arrow-right"></i>
-      </div>
     </div>
 
     <!-- 教案生成浮层 -->
@@ -264,19 +255,24 @@ export default {
   font-family: 'Helvetica Neue', sans-serif;
   background: url('../assets/images/蓝背景板.png') no-repeat center center fixed;
   background-size: cover;
-  height: 100vh;
-  overflow: hidden;
-  opacity: 0.85; /* 控制背景图片透明度 */
+  min-height: 100vh;
+  overflow-y: auto;
+  opacity: 0.85;
+  padding-top: 80px; /* 为固定顶部栏留出空间 */
 }
-
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: #FAF0E6; /* 柔和的亚麻色背景 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* 调整阴影 */
+  background: #E3F2FD; /* 改为浅蓝色背景 */
+  box-shadow: 0 2px 8px rgba(32, 90, 177, 0.1); /* 调整阴影颜色为蓝色 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -292,7 +288,7 @@ header {
   padding: 10px 20px;
   margin-left: 10px;
   border-radius: 30px;
-  background-color: #BFAE9F; /* 柔和的棕褐色 */
+  background-color: #1976D2; /* 改为蓝色按钮 */
   color: white;
   border: none;
   cursor: pointer;
@@ -301,39 +297,43 @@ header {
 }
 
 .login-button:hover, .new-conversation:hover {
-  background-color: #A9A194; /* 悬停时颜色加深 */
+  background-color: #1565C0; /* 悬停时颜色加深 */
 }
 
 .page-title {
   text-align: center;
-  font-size: 32px;
+  font-size: 38px; /* 增大字体大小 */
   font-weight: 700;
-  margin-top: 20px;
+  margin-top: 10px; /* 减少顶部边距 */
+  margin-bottom: -10px; /* 添加底部边距 */
+  margin-left: 170px;
+  color: #0D47A1;
 }
 
 .container {
   display: flex;
-  justify-content: center; /* 改为居中 */
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   gap: 30px;
   flex-wrap: wrap;
-  width: calc(100% - 160px); /* 减去侧边栏宽度 */
-  padding: 20px;
+  width: calc(100% - 180px);
+  padding: 10px 20px; /* 减少顶部内边距 */
   box-sizing: border-box;
-  margin-left: 160px; /* 与侧边栏宽度一致 */
+  margin-left: 180px;
+  min-height: calc(100vh - 80px);
 }
 
-/* 保证侧边栏固定位置，不会影响中央的内容 */
 .sidebar {
-  width: 160px; /* 恢复侧边栏宽度 */
+  width: 160px;
   background-color: rgba(207, 207, 207, 0.7);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 100px;
-  left: 0;
-  height: calc(100vh - 80px);
+  top: 80px; /* 与顶部栏对齐 */
+  left: 10px;
+  height: calc(100vh - 80px); /* 调整高度以延伸到屏幕底部 */
+  overflow-y: auto;
 }
 
 .nav-item {
@@ -359,31 +359,35 @@ header {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding-top: 0; /* 移除顶部内边距 */
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .row {
   display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
-  justify-content: center; /* 让卡片居中 */
+  gap: 30px; /* 增加卡片之间的间距 */
+  margin-bottom: 40px; /* 增加行间距 */
+  justify-content: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .card {
   flex: 0 0 auto;
-  width: 320px; /* 缩小卡片宽度 */
-  height: 250px; /* 缩小卡片高度 */
-  background-color: rgba(245, 230, 224, 0.7); /* 提高透明度 (alpha 0.7) */
-  padding: 20px; /* 调整内边距 */
-  border-radius: 12px; /* 调整圆角 */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 调整阴影 */
-  margin: 15px;
+  width: 450px; /* 增加卡片宽度 */
+  height: 320px; /* 增加卡片高度 */
+  background-color: rgba(245, 230, 224, 0.7);
+  padding: 25px; /* 增加内边距 */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin: 20px; /* 增加外边距 */
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加阴影过渡 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -392,25 +396,25 @@ header {
 }
 
 .card h2 {
-  font-size: 22px; /* 进一步缩小标题字号 */
+  font-size: 26px; /* 增大标题字号 */
   font-weight: 600;
-  margin-bottom: 15px; /* 减少下边距 */
+  margin-bottom: 25px; /* 增加下边距 */
   color: #8B5A5A;
 }
 
 .feature {
   display: flex;
   align-items: center;
-  background-color: rgba(248, 240, 237, 0.8); /* 可选：同步透明度 */
-  padding: 12px; /* 减少内边距 */
+  background-color: rgba(248, 240, 237, 0.8);
+  padding: 16px; /* 增加内边距 */
   text-align: center;
-  border-radius: 10px; /* 调整圆角 */
+  border-radius: 12px;
   cursor: pointer;
   transition: transform 0.3s, background-color 0.3s;
-  gap: 10px; /* 减少图标与文本间距 */
+  gap: 15px; /* 增加图标与文本间距 */
   width: 100%;
-  margin-bottom: 10px; /* 减少下边距 */
-  font-size: 14px; /* 减小字体大小 */
+  margin-bottom: 15px;
+  font-size: 18px; /* 增大字体大小 */
 }
 
 .feature:hover {
@@ -419,37 +423,15 @@ header {
 }
 
 .feature i, .feature img {
-  width: 20px; /* 缩小图标尺寸 */
-  height: 20px; /* 缩小图标尺寸 */
+  width: 24px; /* 增大图标尺寸 */
+  height: 24px;
 }
 
-.input-area {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #FAF0E6; /* 与顶部栏一致的柔和背景 */
-  padding: 15px;
-  width: 80%;
-  border-radius: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 调整阴影 */
-  display: flex;
-  justify-content: space-between;
-}
-
-.input-field {
-  width: 85%;
-  padding: 10px 15px; /* 调整内边距 */
-  border: 1px solid #D3C1B8; /* 柔和的边框色 */
-  border-radius: 20px;
-  font-size: 16px;
-  background-color: rgb(242, 220, 220); /* 保持输入框内部白色 */
-}
-
-.input-icons i {
-  color: #BFAE9F; /* 与按钮颜色一致 */
-  cursor: pointer;
-  margin-left: 10px;
+/* 移除输入区域相关样式 */
+.input-area,
+.input-field,
+.input-icons {
+  display: none;
 }
 
 /* Modal Styles */

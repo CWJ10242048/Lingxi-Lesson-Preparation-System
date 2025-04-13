@@ -4,7 +4,7 @@
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
         <router-link to="/login" class="login-button">登录</router-link>
-        <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
+        <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
     </header>
 
@@ -12,7 +12,7 @@
       <!-- 左侧导航栏 -->
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
-          <i class="fas fa-history"></i>智能对话
+          <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
           <i class="fas fa-history"></i>输出历史
@@ -125,7 +125,7 @@ export default {
       
       try {
         // 等待30秒
-        await new Promise(resolve => setTimeout(resolve, 30000));
+        await new Promise(resolve => setTimeout(resolve, 3000));
         
         // 发送请求到后端
         const response = await http.request({
@@ -179,8 +179,8 @@ export default {
   font-family: 'Helvetica Neue', sans-serif;
   background: url('../assets/images/蓝背景板.png') no-repeat center center fixed;
   background-size: cover;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-y: auto;
   opacity: 0.85;
 }
 
@@ -189,8 +189,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: #FAF0E6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #E3F2FD; /* 改为浅蓝色背景 */
+  box-shadow: 0 2px 8px rgba(32, 90, 177, 0.1); /* 调整阴影颜色为蓝色 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 .logo {
@@ -220,7 +226,8 @@ export default {
 
 .container {
   display: flex;
-  margin-top: -50px;
+  margin-top: 30px;
+  padding-bottom: 50px;
 }
 
 .sidebar {
@@ -230,9 +237,11 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 100px;
-  left: 0;
-  height: calc(100vh - 80px);
+  top: 80px; /* 与顶部栏对齐 */
+  left: 10px;
+  height: calc(100vh - 80px); /* 调整高度以延伸到屏幕底部 */
+  overflow-y: auto;
+  transition: all 0.3s ease;
 }
 
 .nav-item {
@@ -258,7 +267,9 @@ export default {
   flex: 1;
   padding: 20px;
   margin-left: 150px;
-  margin-top: -20px;
+  margin-top: 60px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
 }
 
 .page-title {
@@ -266,7 +277,8 @@ export default {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 30px;
-  margin-top: -20px;
+  margin-top: 0;
+  transition: all 0.3s ease;
 }
 
 .form-container {
@@ -276,6 +288,20 @@ export default {
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-group {

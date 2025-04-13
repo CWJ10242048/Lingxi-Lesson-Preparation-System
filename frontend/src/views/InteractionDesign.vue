@@ -4,7 +4,7 @@
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
         <router-link to="/login" class="login-button">登录</router-link>
-        <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
+        <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
     </header>
 
@@ -12,7 +12,7 @@
       <!-- 左侧导航栏 -->
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
-          <i class="fas fa-history"></i>智能对话
+          <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
           <i class="fas fa-history"></i>输出历史
@@ -82,10 +82,10 @@
                   </label>
                 </div>
               </div>
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <label for="customInteractionStyle">自定义互动风格</label>
                 <input type="text" id="customInteractionStyle" v-model="formData.customInteractionStyle" placeholder="请输入自定义互动风格">
-              </div> -->
+              </div>
             </div>
             <div class="form-group">
               <label for="courseDuration">课程时长（分钟）</label>
@@ -213,8 +213,8 @@ export default {
   font-family: 'Helvetica Neue', sans-serif;
   background: url('../assets/images/蓝背景板.png') no-repeat center center fixed;
   background-size: cover;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-y: auto;
   opacity: 0.85;
 }
 
@@ -223,9 +223,15 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: #FAF0E6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #E3F2FD; /* 改为浅蓝色背景 */
+  box-shadow: 0 2px 8px rgba(32, 90, 177, 0.1); /* 调整阴影颜色为蓝色 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
+
 
 .logo {
   width: 150px;
@@ -255,6 +261,7 @@ export default {
 .container {
   display: flex;
   margin-top: 50px;
+  padding-bottom: 50px;
 }
 
 .sidebar {
@@ -264,9 +271,10 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 100px;
-  left: 0;
-  height: calc(100vh - 80px);
+  top: 80px; /* 与顶部栏对齐 */
+  left: 10px;
+  height: calc(100vh - 80px); /* 调整高度以延伸到屏幕底部 */
+  overflow-y: auto;
 }
 
 .nav-item {
@@ -292,7 +300,9 @@ export default {
   flex: 1;
   padding: 20px;
   margin-left: 150px;
-  margin-top: -115px;
+  margin-top: 60px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
 }
 
 .page-title {

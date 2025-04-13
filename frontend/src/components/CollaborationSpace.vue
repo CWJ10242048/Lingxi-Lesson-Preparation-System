@@ -5,7 +5,7 @@
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
         <router-link to="/login" class="login-button">登录</router-link>
-        <button class="new-conversation"><i class="fas fa-plus"></i> 新对话</button>
+        <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
     </header>
 
@@ -13,7 +13,7 @@
       <!-- 左侧导航栏 -->
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
-          <i class="fas fa-history"></i>智能对话
+          <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
           <i class="fas fa-history"></i>输出历史
@@ -109,13 +109,18 @@ export default {
 }
 
 /* 头部样式 */
-.header {
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  background: #E6F7FF; /* 淡蓝色，与背景板更协调 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #E3F2FD; /* 改为浅蓝色背景 */
+  box-shadow: 0 2px 8px rgba(32, 90, 177, 0.1); /* 调整阴影颜色为蓝色 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -166,9 +171,10 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 80px;
-  left: 0;
-  height: calc(100vh - 80px);
+  top: 80px; /* 与顶部栏对齐 */
+  left: 10px;
+  height: calc(100vh - 80px); /* 调整高度以延伸到屏幕底部 */
+  overflow-y: auto;
 }
 
 .nav-item {
@@ -194,6 +200,7 @@ export default {
 .main-content {
   flex: 1;
   display: flex;
+  margin-top: 60px;
   flex-direction: column;
   align-items: stretch; /* 拉伸子元素以填充整个宽度 */
 }
