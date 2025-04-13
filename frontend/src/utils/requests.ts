@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios from 'axios';
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 class HttpRequest {
     private readonly baseUrl: string;
@@ -10,6 +11,10 @@ class HttpRequest {
             baseURL: this.baseUrl,
             timeout: 80000,
             withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
         });
 
         this.interceptors();
@@ -18,6 +23,11 @@ class HttpRequest {
     // 请求拦截
     private interceptors() {
         this.axiosInstance.interceptors.request.use(config => {
+            // 添加请求头
+            config.headers = {
+                ...config.headers,
+                'Accept': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            };
             return config;
         }, error => {
             return Promise.reject(error);
@@ -25,7 +35,7 @@ class HttpRequest {
 
         this.axiosInstance.interceptors.response.use(response => {
             // 处理返回的数据
-            console.log('返回数据处理', response.data);
+            console.log('返回数据处理', response);
             return response;
         }, error => {
             console.error('error==>', error);

@@ -85,6 +85,8 @@
 </template>
 
 <script>
+import http from '../utils/requests';
+
 export default {
   name: 'PPTGeneration',
   data() {
@@ -107,12 +109,48 @@ export default {
     async generatePPT() {
       this.isGenerating = true;
       try {
-        // 模拟生成过程
-        await new Promise(resolve => setTimeout(resolve, 30000));
-        alert('PPT生成成功！');
+        // 等待20秒
+        await new Promise(resolve => setTimeout(resolve, 20000));
+        
+        // 发送请求到后端
+        const response = await http.request({
+          url: '/download-ppt',
+          method: 'get',
+          responseType: 'blob',
+          headers: {
+            'Accept': 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+          }
+        });
+
+        if (!response.data) {
+          throw new Error('没有接收到文件数据');
+        }
+
+        // 创建下载链接
+        const blob = new Blob([response.data], { 
+          type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        });
+        
+        if (blob.size === 0) {
+          throw new Error('文件大小为0');
+        }
+
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = '机器学习课程线性回归课时教学PPT.pptx';
+        document.body.appendChild(link);
+        link.click();
+        
+        // 清理
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+        
+        alert('PPT生成成功！正在下载文件');
+        
       } catch (error) {
         console.error('生成失败:', error);
-        alert('生成失败，请重试');
+        alert('生成失败，请重试。错误信息：' + error.message);
       } finally {
         this.isGenerating = false;
       }

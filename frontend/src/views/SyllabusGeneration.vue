@@ -98,6 +98,8 @@
 </template>
 
 <script>
+import http from '../utils/requests';
+
 export default {
   name: 'SyllabusGeneration',
   data() {
@@ -119,35 +121,51 @@ export default {
       this.formData.referenceMaterial = event.target.files[0];
     },
     async generateSyllabus() {
-      // 显示生成中状态
       this.isGenerating = true;
       
       try {
-        // 模拟生成过程
+        // 等待30秒
         await new Promise(resolve => setTimeout(resolve, 30000));
         
-        // 生成成功提示
-        alert('教学大纲生成成功！');
+        // 发送请求到后端
+        const response = await http.request({
+          url: '/download-syllabus',
+          method: 'get',
+          responseType: 'blob',
+          headers: {
+            'Accept': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          }
+        });
+
+        if (!response.data) {
+          throw new Error('没有接收到文件数据');
+        }
+
+        // 创建下载链接
+        const blob = new Blob([response.data], { 
+          type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        });
         
-        // 自动下载文件
-        const filePath = 'E:\\gitplay\\Lingxi-Lesson-Preparation-System\\Lingxi-Lesson-Preparation-System\\result\\机器学习教学大纲.docx';
+        if (blob.size === 0) {
+          throw new Error('文件大小为0');
+        }
+
+        const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.href = filePath;
+        link.href = url;
         link.download = '机器学习教学大纲.docx';
         document.body.appendChild(link);
         link.click();
+        
+        // 清理
+        window.URL.revokeObjectURL(url);
         document.body.removeChild(link);
-
-        // 下载成功后提示并自动打开文件
-        setTimeout(() => {
-          alert('文件下载成功！正在打开文件...');
-          // 使用系统默认程序打开文件
-          window.open(filePath, '_blank');
-        }, 1000);
+        
+        alert('文件生成成功！正在下载文件');
         
       } catch (error) {
         console.error('生成失败:', error);
-        alert('生成失败，请重试');
+        alert('生成失败，请重试。错误信息：' + error.message);
       } finally {
         this.isGenerating = false;
       }

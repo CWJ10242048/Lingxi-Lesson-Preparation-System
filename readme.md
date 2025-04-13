@@ -21,5 +21,5 @@
    ```  
 
 **运行代码**
-1. 先再pycharm中运行app.py
+1. 先再pycharm中运行main.py
 2. cd到frontend目录下，执行npm run dev
