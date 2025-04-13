@@ -23,7 +23,7 @@
         <router-link to="/CollaborationSpace" class="nav-item">
           <i class="fas fa-users"></i>协作空间
         </router-link>
-        <div class="nav-item">
+        <div class="nav-item" @click="navigateToPersonalCenter">
           <i class="fas fa-user"></i>个人中心
         </div>
       </nav>
@@ -245,6 +245,9 @@ export default {
     },
     navigateToConceptPrerequisite() {
       this.$router.push('/concept-prerequisite');
+    },
+    navigateToPersonalCenter() {
+      this.$router.push('/personal-center');
     }
   }
 };

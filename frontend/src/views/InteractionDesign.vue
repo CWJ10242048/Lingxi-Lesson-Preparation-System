@@ -158,7 +158,7 @@
               class="generate-btn"
               :disabled="isSubmitting"
             >
-              {{ isSubmitting ? '提交中...' : '提交设计' }}
+              {{ isSubmitting ? '互动环节正在生成中...' : '提交设计' }}
             </button>
           </form>
         </div>
@@ -168,6 +168,8 @@
 </template>
 
 <script>
+import http from '../utils/requests';
+
 export default {
   name: 'InteractionDesign',
   data() {
@@ -192,14 +194,48 @@ export default {
     async submitForm() {
       this.isSubmitting = true;
       try {
-        // 等待20秒
-        await new Promise(resolve => setTimeout(resolve, 20000));
+        // 等待5秒
+        await new Promise(resolve => setTimeout(resolve, 5000));
         
-        // 模拟提交成功
-        alert('提交成功！');
+        // 发送请求到后端
+        const response = await http.request({
+          url: '/download-interaction-design',
+          method: 'get',
+          responseType: 'blob',
+          headers: {
+            'Accept': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          }
+        });
+
+        if (!response.data) {
+          throw new Error('没有接收到文件数据');
+        }
+
+        // 创建下载链接
+        const blob = new Blob([response.data], { 
+          type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        });
+        
+        if (blob.size === 0) {
+          throw new Error('文件大小为0');
+        }
+
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = '互动环节设计.docx';
+        document.body.appendChild(link);
+        link.click();
+        
+        // 清理
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+        
+        alert('文件生成成功！正在下载文件');
+        
       } catch (error) {
         console.error('提交失败:', error);
-        alert('提交失败，请重试');
+        alert('提交失败，请重试。错误信息：' + error.message);
       } finally {
         this.isSubmitting = false;
       }

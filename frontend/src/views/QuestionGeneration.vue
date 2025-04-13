@@ -31,12 +31,13 @@
           <form @submit.prevent="generateQuestions">
             <div class="form-group">
               <label for="subject">目标科目</label>
-              <select id="subject" v-model="formData.subject" required>
-                <option value="">请选择科目</option>
-                <option value="计算机科学">计算机科学</option>
-                <option value="数据库原理">数据库原理</option>
-                <option value="SQL">SQL</option>
-              </select>
+              <input 
+                type="text" 
+                id="subject" 
+                v-model="formData.subject" 
+                placeholder="请输入目标科目"
+                required
+              >
             </div>
 
             <div class="form-group">
@@ -278,13 +279,19 @@ label {
   color: #333;
 }
 
-select, textarea {
+select, textarea, input[type="text"] {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
   background-color: white;
+}
+
+input[type="text"]:focus {
+  border-color: #2196F3;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
 }
 
 .file-upload {

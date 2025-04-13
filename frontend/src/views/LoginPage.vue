@@ -27,115 +27,184 @@ const imageUrl = "https://picsum.photos/800";
 </script>
 
 <template>
-  <div class="h-[100vh] w-[100vw] bg-[var(--login)]" data-theme="emerald">
-    <div class="box">
-      <div
-        class="forms relative box-border flex h-full w-1/2 flex-col items-center"
-      >
-        <div class="tips box-border">
-          <span
-            :class="{ 'active-choose': currentNum === 0 }"
-            class="alidongfang login-btn mr-5"
-            @click="switchForm('login')"
-            >登录</span
-          >
-          <span
-            :class="{ 'active-choose': currentNum === 1 }"
-            class="alidongfang register-btn"
-            @click="switchForm('register')"
-            >注册</span
-          >
+  <div class="login-page">
+    <header class="header">
+      <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
+    </header>
+
+    <div class="container">
+      <div class="login-container">
+        <h1 class="page-title">用户登录</h1>
+        <div class="form-container">
+          <form @submit.prevent="handleLogin">
+            <div class="form-group">
+              <label for="username">用户名</label>
+              <input 
+                type="text" 
+                id="username" 
+                v-model="formData.username" 
+                placeholder="请输入用户名"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label for="password">密码</label>
+              <input 
+                type="password" 
+                id="password" 
+                v-model="formData.password" 
+                placeholder="请输入密码"
+                required
+              >
+            </div>
+            <button type="submit" class="login-btn">登录</button>
+            <div class="form-links">
+              <router-link to="/register" class="link">注册账号</router-link>
+              <router-link to="/forget-password" class="link">忘记密码？</router-link>
+            </div>
+          </form>
         </div>
-        <transition mode="out-in" name="into">
-          <KeepAlive>
-            <component
-              :is="currentFormType"
-              @toForgetForm="switchForm"
-            ></component>
-          </KeepAlive>
-        </transition>
       </div>
     </div>
   </div>
 </template>
 
-<style>
-.box {
-  width: 85vw;
-  height: 85vh;
-  background: url("https://picsum.photos/800") no-repeat fixed right top;
-  background-size: 50% 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 30px;
-  font-family: Ubuntu, sans-serif;
-  overflow: hidden;
+<script>
+export default {
+  name: 'LoginPage',
+  data() {
+    return {
+      formData: {
+        username: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    handleLogin() {
+      // 直接返回登录成功
+      alert('登录成功！');
+      this.$router.push('/HomePage');
+    }
+  }
 }
+</script>
 
-.box .forms {
-  background-color: var(--login-b);
-  border-radius: 30px 0 0 30px;
-  color: rgb(255, 255, 255);
+<style scoped>
+.login-page {
+  font-family: 'Helvetica Neue', sans-serif;
+  background: url('../assets/images/蓝背景板.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
   overflow-y: auto;
+  opacity: 0.85;
 }
 
-.box .forms .tips {
-  width: 70%;
-  height: 10%;
-  font-size: 25px;
-  margin: 4vh;
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 30px;
+  background: #E3F2FD;
+  box-shadow: 0 2px 8px rgba(32, 90, 177, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-.box .forms .tips span {
+.logo {
+  width: 150px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 80px 20px 20px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
-  padding-bottom: 5px;
-  color: var(--login1);
+  transition: background-color 0.3s;
 }
 
-.box .forms .tips span:hover {
-  border-bottom: 4px solid var(--login3);
-  color: var(--title-icon-color);
+.login-btn:hover {
+  background-color: #0b7dda;
 }
 
-.box .forms .tips span.active-choose {
-  border-bottom: 4px solid var(--login3);
-  color: var(--title-icon-color);
+.form-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 40px;
 }
 
-.input-container input {
-  background-color: var(--login2);
-  color: var(--title-icon-color);
-  font-size: 20px;
-  border: 0;
+.link {
+  color: #2196F3;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+  padding: 0 10px;
 }
 
-@media (max-width: 1024px) {
-  .box {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-  }
-
-  .box .forms {
-    width: 100%;
-    border-radius: 0;
-  }
-}
-
-@keyframes into {
-  0% {
-    transform: translateY(5vh);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-}
-
-.into-enter-active {
-  animation: into 0.5s ease-in-out forwards;
+.link:hover {
+  color: #0b7dda;
+  text-decoration: underline;
 }
 </style>

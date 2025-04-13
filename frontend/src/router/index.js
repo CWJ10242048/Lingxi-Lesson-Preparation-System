@@ -8,6 +8,7 @@ import KnowledgeTracking from '../views/KnowledgeTracking.vue';
 import KnowledgeGraph from '../views/KnowledgeGraph.vue';
 import ResourceCommunity from '../views/ResourceCommunity.vue';
 import ConceptPrerequisiteRecognition from '../views/ConceptPrerequisiteRecognition.vue';
+import PersonalCenter from '../views/PersonalCenter.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -150,6 +151,11 @@ const router = createRouter({
             path: '/concept-prerequisite',
             name: 'ConceptPrerequisiteRecognition',
             component: ConceptPrerequisiteRecognition
+        },
+        {
+            path: '/personal-center',
+            name: 'PersonalCenter',
+            component: PersonalCenter
         }
     ],
 });

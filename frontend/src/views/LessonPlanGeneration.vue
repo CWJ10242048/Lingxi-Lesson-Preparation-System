@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import request from '../utils/requests'
+
 export default {
   name: 'LessonPlanGeneration',
   data() {
@@ -91,8 +93,27 @@ export default {
     async generateLessonPlan() {
       this.isGenerating = true;
       try {
-        // 模拟生成过程
-        await new Promise(resolve => setTimeout(resolve, 30000));
+        // 等待5秒
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        
+        // 发送请求到后端
+        const response = await request({
+          url: '/api/generate-lesson-plan',
+          method: 'post',
+          data: this.formData,
+          responseType: 'blob'  // 设置响应类型为blob以接收文件
+        });
+
+        // 创建下载链接
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', '机器学习学期教案.docx');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
         alert('教案生成成功！');
       } catch (error) {
         console.error('生成失败:', error);

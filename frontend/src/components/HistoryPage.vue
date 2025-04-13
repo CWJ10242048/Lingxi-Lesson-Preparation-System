@@ -193,6 +193,7 @@ header {
 .main-content {
   flex: 1;
   margin-top: 60px;
+
   display: flex;
   flex-direction: column;
 }

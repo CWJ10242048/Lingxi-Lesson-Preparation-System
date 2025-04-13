@@ -1,4 +1,4 @@
-from flask import Flask, send_file, Response
+from flask import Flask, send_file, Response, request
 from flask_cors import CORS
 import os
 
@@ -54,5 +54,49 @@ def download_ppt():
         print(f"Error: {str(e)}")
         return Response(f"服务器错误: {str(e)}", status=500)
 
+@app.route('/download-interaction-design')
+def download_interaction_design():
+    try:
+        file_path = r"E:\gitplay\Lingxi-Lesson-Preparation-System\Lingxi-Lesson-Preparation-System\result\互动环节设计.docx"
+        
+        # 检查文件是否存在
+        if not os.path.exists(file_path):
+            return Response("文件不存在", status=404)
+        
+        # 设置正确的 MIME 类型和响应头
+        return send_file(
+            file_path,
+            as_attachment=True,
+            mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            download_name='互动环节设计.docx',
+            conditional=False  # 禁用条件请求
+        )
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return Response(f"服务器错误: {str(e)}", status=500)
+
+@app.route('/api/generate-lesson-plan', methods=['POST'])
+def generate_lesson_plan():
+    try:
+        # 获取请求数据
+        data = request.get_json()
+        
+        # 文件路径
+        file_path = "E:/gitplay/Lingxi-Lesson-Preparation-System/Lingxi-Lesson-Preparation-System/result/机器学习学期教案.docx"
+        
+        # 检查文件是否存在
+        if not os.path.exists(file_path):
+            return {"error": "文件不存在"}, 404
+            
+        # 发送文件
+        return send_file(
+            file_path,
+            as_attachment=True,
+            download_name='机器学习学期教案.docx',
+            mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        )
+    except Exception as e:
+        return {"error": str(e)}, 500
+
 if __name__ == '__main__':
-    app.run(port=5000, debug=True) 
+    app.run(host='0.0.0.0', port=5000, debug=True) 
