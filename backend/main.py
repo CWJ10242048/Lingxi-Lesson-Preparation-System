@@ -57,7 +57,7 @@ def download_ppt():
 @app.route('/download-interaction-design')
 def download_interaction_design():
     try:
-        file_path = r"E:\gitplay\Lingxi-Lesson-Preparation-System\Lingxi-Lesson-Preparation-System\result\互动环节设计.docx"
+        file_path = get_result_path('互动环节设计.docx')
         
         # 检查文件是否存在
         if not os.path.exists(file_path):
@@ -81,8 +81,8 @@ def generate_lesson_plan():
         # 获取请求数据
         data = request.get_json()
         
-        # 文件路径
-        file_path = "E:/gitplay/Lingxi-Lesson-Preparation-System/Lingxi-Lesson-Preparation-System/result/机器学习学期教案.docx"
+        # 使用相对路径
+        file_path = get_result_path('机器学习学期教案.docx')
         
         # 检查文件是否存在
         if not os.path.exists(file_path):
