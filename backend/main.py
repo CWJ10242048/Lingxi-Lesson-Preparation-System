@@ -5,10 +5,17 @@ import os
 app = Flask(__name__)
 CORS(app)  # 启用 CORS
 
+# 获取当前文件所在目录的上级目录（项目根目录）
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def get_result_path(filename):
+    """构建result目录下文件的完整路径"""
+    return os.path.join(BASE_DIR, 'result', filename)
+
 @app.route('/download-syllabus')
 def download_syllabus():
     try:
-        file_path = r"E:\gitplay\Lingxi-Lesson-Preparation-System\Lingxi-Lesson-Preparation-System\result\机器学习教学大纲.docx"
+        file_path = get_result_path('机器学习教学大纲.docx')
         
         # 检查文件是否存在
         if not os.path.exists(file_path):
@@ -29,7 +36,7 @@ def download_syllabus():
 @app.route('/download-ppt')
 def download_ppt():
     try:
-        file_path = r"E:\gitplay\Lingxi-Lesson-Preparation-System\Lingxi-Lesson-Preparation-System\result\机器学习课程线性回归课时教学PPT.pptx"
+        file_path = get_result_path('机器学习课程线性回归课时教学PPT.pptx')
         
         # 检查文件是否存在
         if not os.path.exists(file_path):

@@ -45,7 +45,7 @@
                 <img src="" alt="" width="24" height="24">
                 教学大纲生成
               </div>
-              <div class="feature">
+              <div class="feature" @click="navigateToInteractionDesign">
                 <i class="fas fa-lightbulb" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/every-user.svg" alt="灯泡图标" width="24" height="24">
                 互动环节设计
@@ -81,19 +81,19 @@
           <section class="card">
             <h2>学情分析</h2>
             <div class="features">
-              <div class="feature">
+              <div class="feature" @click="navigateToStudentDataDashboard">
                 <i class="fas fa-chart-bar" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/data-file.svg" alt="带图表的人的图标" width="24" height="24">
                 学生数据看板
               </div>
-              <div class="feature">
+              <div class="feature" @click="navigateToCognitiveDiagnosis">
                 <i class="fas fa-eye" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/woman.svg" alt="眼睛图标" width="24" height="24">
                 认知诊断
               </div>
-              <div class="feature">
+              <div class="feature" @click="navigateToKnowledgeTracking">
                 <i class="fas fa-eye" style="color: #2196F3;"></i>
-                <img src="" alt="" width="24" height="24">
+                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/mind-mapping.svg" alt="知识追踪图标" width="24" height="24">
                 知识追踪
               </div>
             </div>
@@ -103,17 +103,18 @@
           <section class="card">
             <h2>资源库</h2>
             <div class="features">
-              <div class="feature">
+              <div class="feature" @click="navigateToKnowledgeGraph">
                 <i class="fas fa-project-diagram" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/mind-mapping.svg" alt="带线的三角形图标" width="24" height="24">
                 知识图谱
               </div>
-              <div class="feature">
-                <i class="fas fa-users" style="color: #2196F3;"></i>
+              <div class="feature" @click="navigateToResourceCommunity">
+                <i class="fas fa-users"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/message-search.svg" alt="三个人的图标（不同）" width="24" height="24">
-                资源社区
+    
+                <span>资源社区</span>
               </div>
-              <div class="feature">
+              <div class="feature" @click="navigateToConceptPrerequisite">
                 <i class="fas fa-heart" style="color: #2196F3;"></i>
                 <img src="" alt="" width="24" height="24">
                 概念先决识别
@@ -232,6 +233,27 @@ export default {
     },
     navigateToQuestionGeneration() {
       this.$router.push('/QuestionGeneration');
+    },
+    navigateToInteractionDesign() {
+      this.$router.push('/interaction-design');
+    },
+    navigateToStudentDataDashboard() {
+      this.$router.push('/student-data-dashboard');
+    },
+    navigateToCognitiveDiagnosis() {
+      this.$router.push('/cognitive-diagnosis');
+    },
+    navigateToKnowledgeTracking() {
+      this.$router.push('/knowledge-tracking');
+    },
+    navigateToKnowledgeGraph() {
+      this.$router.push('/knowledge-graph');
+    },
+    navigateToResourceCommunity() {
+      this.$router.push('/resource-community');
+    },
+    navigateToConceptPrerequisite() {
+      this.$router.push('/concept-prerequisite');
     }
   }
 };

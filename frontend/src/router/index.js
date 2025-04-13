@@ -2,8 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import NProgress from "nprogress"; // 导入 nprogress
 import "nprogress/nprogress.css";
 import HomePage from '../components/home_page.vue';
-import HistoryPage from '../components/HistoryPage.vue';
-import CollaborationSpace from '../components/CollaborationSpace.vue';
+import StudentDataDashboard from '../views/StudentDataDashboard.vue';
+import CognitiveDiagnosis from '../views/CognitiveDiagnosis.vue';
+import KnowledgeTracking from '../views/KnowledgeTracking.vue';
+import KnowledgeGraph from '../views/KnowledgeGraph.vue';
+import ResourceCommunity from '../views/ResourceCommunity.vue';
+import ConceptPrerequisiteRecognition from '../views/ConceptPrerequisiteRecognition.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,26 +20,26 @@ const router = createRouter({
             path: '/HomePage',
             name: 'HomePage',
             component: HomePage,
-			meta: {
-			    title: "Ling Xi | 智能备课助手", // 定义标题
-			},
+            meta: {
+                title: "Ling Xi | 智能备课助手",
+            },
         },
-		{
-		    path: '/HistoryPage',
-		    name: 'HistoryPage',
-		    component: HistoryPage,
-			meta: {
-			    title: "Ling Xi | 智能备课助手", // 定义标题
-			},
-		},
-		{
-		    path: '/CollaborationSpace',
-		    name: 'CollaborationSpace',
-		    component: CollaborationSpace,
-			meta: {
-			    title: "Ling Xi | 智能备课助手", // 定义标题
-			},
-		},
+        {
+            path: '/HistoryPage',
+            name: 'HistoryPage',
+            component: () => import('../components/HistoryPage.vue'),
+            meta: {
+                title: "Ling Xi | 智能备课助手",
+            },
+        },
+        {
+            path: '/CollaborationSpace',
+            name: 'CollaborationSpace',
+            component: () => import('../components/CollaborationSpace.vue'),
+            meta: {
+                title: "Ling Xi | 智能备课助手",
+            },
+        },
         {
             path: "/SyllabusGeneration",
             name: "SyllabusGeneration",
@@ -105,6 +109,47 @@ const router = createRouter({
             meta: {
                 title: 'Ling Xi | 智能出题'
             }
+        },
+        {
+            path: '/interaction-design',
+            name: 'InteractionDesign',
+            component: () => import('../views/InteractionDesign.vue'),
+            meta: {
+                title: 'Ling Xi | 互动环节设计'
+            }
+        },
+        {
+            path: '/student-data-dashboard',
+            name: 'StudentDataDashboard',
+            component: StudentDataDashboard
+        },
+        {
+            path: '/cognitive-diagnosis',
+            name: 'CognitiveDiagnosis',
+            component: () => import('../views/CognitiveDiagnosis.vue'),
+            meta: {
+                title: 'Ling Xi | 认知诊断'
+            }
+        },
+        {
+            path: '/knowledge-tracking',
+            name: 'KnowledgeTracking',
+            component: KnowledgeTracking
+        },
+        {
+            path: '/knowledge-graph',
+            name: 'KnowledgeGraph',
+            component: KnowledgeGraph
+        },
+        {
+            path: '/resource-community',
+            name: 'ResourceCommunity',
+            component: ResourceCommunity
+        },
+        {
+            path: '/concept-prerequisite',
+            name: 'ConceptPrerequisiteRecognition',
+            component: ConceptPrerequisiteRecognition
         }
     ],
 });
