@@ -4,6 +4,7 @@
     <header class="header">
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
+        <span class="timestamp">{{ currentTime }}</span>
         <router-link to="/login" class="login-button">登录</router-link>
         <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
@@ -13,15 +14,19 @@
       <!-- 左侧导航栏 -->
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
-          <i class="fas fa-home"></i>主页
+          <img src="https://img.icons8.com/small/16/school.png" alt="主页" width="24" height="24">
+          <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
+          <img src="https://img.icons8.com/small/16/information.png" alt="输出历史" width="24" height="24">
           <i class="fas fa-history"></i>输出历史
         </router-link>
         <router-link to="/CollaborationSpace" class="nav-item">
+          <img src="https://img.icons8.com/small/96/news.png" alt="协作空间" width="24" height="24">
           <i class="fas fa-users"></i>协作空间
         </router-link>
         <div class="nav-item active">
+          <img src="https://img.icons8.com/small/96/user-male-circle.png" alt="个人中心" width="24" height="24">
           <i class="fas fa-user"></i>个人中心
         </div>
       </nav>
@@ -106,6 +111,7 @@ export default {
   min-height: 100vh;
   padding-top: 80px;
   position: relative;
+  opacity: 0.85;  /* 这里设置了透明度为0.85,所以看起来比较蓝 */
 }
 
 .header {
@@ -154,15 +160,14 @@ export default {
 }
 
 .sidebar {
-  width: 160px;
-  background-color: rgba(207, 207, 207, 0.7);
+  width: 200px;
+  background-color: rgb(101, 116, 137);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 80px;
-  left: 10px;
-  height: calc(100vh - 100px);
+  left: 0px;
+  height: calc(100vh - 80px);
   overflow-y: auto;
 }
 
@@ -170,15 +175,16 @@ export default {
   padding: 12px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* 添加水平居中 */
   margin-bottom: 10px;
-  color: #0D47A1;
+  /* color: #0D47A1; 变深的蓝色 */
+  color: rgb(209, 213, 219);
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.3s;
-  text-align: center;
-  width: 100%;
-  font-size: 22px;
+  text-align: center; /* 确保文字居中 */
+  width: 100%; /* 确保占满整个宽度 */
+  font-size: 22px; /* 增大字体大小 */
 }
 
 .nav-item:hover, .nav-item.active {
@@ -189,7 +195,7 @@ export default {
   flex: 1;
   margin-left: 200px;
   margin-right: 20px;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(230, 228, 230, 0.95);
   border-radius: 12px;
   padding: 30px;
   min-height: calc(100vh - 140px);
@@ -323,12 +329,12 @@ export default {
     padding: 10px;
   }
 
-  .sidebar {
+  /* .sidebar {
     position: static;
     width: 100%;
     height: auto;
     margin-bottom: 20px;
-  }
+  } */
 
   .main-content {
     margin-left: 0;

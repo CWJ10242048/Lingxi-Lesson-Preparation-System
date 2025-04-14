@@ -4,6 +4,7 @@
     <header class="header">
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
+        <span class="timestamp">{{ currentTime }}</span>
         <router-link to="/login" class="login-button">登录</router-link>
         <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
@@ -13,15 +14,19 @@
       <!-- 左侧导航栏 -->
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
+          <img src="https://img.icons8.com/small/16/school.png" alt="主页" width="24" height="24">
           <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
+          <img src="https://img.icons8.com/small/16/information.png" alt="输出历史" width="24" height="24">
           <i class="fas fa-history"></i>输出历史
         </router-link>
         <router-link to="/CollaborationSpace" class="nav-item">
+          <img src="https://img.icons8.com/small/96/news.png" alt="协作空间" width="24" height="24">
           <i class="fas fa-users"></i>协作空间
         </router-link>
-        <div class="nav-item">
+        <div class="nav-item" @click="navigateToPersonalCenter">
+          <img src="https://img.icons8.com/small/96/user-male-circle.png" alt="个人中心" width="24" height="24">
           <i class="fas fa-user"></i>个人中心
         </div>
       </nav>
@@ -44,9 +49,64 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>线性回归PPT</td>
-                  <td>PPT生成</td>
+                  <td>机器学习教学大纲</td>
+                  <td>教学大纲生成</td>
                   <td>2024/4/6 8:34</td>
+                  <td class="action-buttons">
+                    <span class="action-btn delete-btn">删除</span>
+                    <span class="action-btn export-btn">导出</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>高等数学练习题</td>
+                  <td>智能出题</td>
+                  <td>2024/4/5 15:20</td>
+                  <td class="action-buttons">
+                    <span class="action-btn delete-btn">删除</span>
+                    <span class="action-btn export-btn">导出</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>数据结构知识图谱</td>
+                  <td>知识图谱</td>
+                  <td>2024/4/4 10:15</td>
+                  <td class="action-buttons">
+                    <span class="action-btn delete-btn">删除</span>
+                    <span class="action-btn export-btn">导出</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>Python编程教案</td>
+                  <td>教案生成</td>
+                  <td>2024/4/3 14:30</td>
+                  <td class="action-buttons">
+                    <span class="action-btn delete-btn">删除</span>
+                    <span class="action-btn export-btn">导出</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>计算机网络互动设计</td>
+                  <td>互动环节设计</td>
+                  <td>2024/4/2 9:45</td>
+                  <td class="action-buttons">
+                    <span class="action-btn delete-btn">删除</span>
+                    <span class="action-btn export-btn">导出</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>数据库原理PPT</td>
+                  <td>PPT生成</td>
+                  <td>2024/4/1 16:20</td>
                   <td class="action-buttons">
                     <span class="action-btn delete-btn">删除</span>
                     <span class="action-btn export-btn">导出</span>
@@ -66,33 +126,29 @@ export default {
   name: 'HistoryPage',
   data() {
     return {
-      showLessonPlanModal: false,
-      showPPTGenerateModal: false
-    };
+      currentTime: ''
+    }
+  },
+  mounted() {
+    this.updateTime();
+    setInterval(this.updateTime, 1000);
   },
   methods: {
-    openLessonPlanModal() {
-      this.showLessonPlanModal = true;
+    updateTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      this.currentTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     },
-    closeLessonPlanModal() {
-      this.showLessonPlanModal = false;
-    },
-    openPPTGenerateModal() {
-      this.showPPTGenerateModal = true;
-    },
-    closePPTGenerateModal() {
-      this.showPPTGenerateModal = false;
-    },
-    generateLessonPlan() {
-      alert('教案生成');
-      this.closeLessonPlanModal();
-    },
-    generatePPT() {
-      alert('PPT生成');
-      this.closePPTGenerateModal();
+    navigateToPersonalCenter() {
+      this.$router.push('/personal-center');
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -129,11 +185,19 @@ header {
   align-items: center;
 }
 
-.login-button, .new-conversation {
+.timestamp {
+  color: #1976D2;
+  font-size: 16px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.login-button,
+.new-conversation {
   padding: 10px 20px;
   margin-left: 10px;
   border-radius: 30px;
-  background-color: #BFAE9F; /* 柔和的棕褐色 */
+  background-color: #1976D2;
   color: white;
   border: none;
   cursor: pointer;
@@ -159,15 +223,14 @@ header {
 
 /* 保证侧边栏固定位置，不会影响中央的内容 */
 .sidebar {
-  width: 160px;
-  background-color: rgba(207, 207, 207, 0.7);
+  width: 200px;
+  background-color: rgb(101, 116, 137);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 80px; /* 与顶部栏对齐 */
-  left: 10px;
-  height: calc(100vh - 80px); /* 调整高度以延伸到屏幕底部 */
+  top: 80px;
+  left: 0px;
+  height: calc(100vh - 80px);
   overflow-y: auto;
 }
 
@@ -177,7 +240,8 @@ header {
   align-items: center;
   justify-content: center; /* 添加水平居中 */
   margin-bottom: 10px;
-  color: #0D47A1; /* 变深的蓝色 */
+  /* color: #0D47A1; 变深的蓝色 */
+  color: rgb(209, 213, 219);
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.3s;

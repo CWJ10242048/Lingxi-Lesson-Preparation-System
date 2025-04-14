@@ -123,12 +123,17 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 80px 20px 20px;
+  padding: 0 20px;
+  margin-top: -40px; /* 向上偏移以补偿header的空间 */
 }
 
 .login-container {
   width: 100%;
   max-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .page-title {
@@ -137,13 +142,14 @@ export default {
   font-weight: 700;
   margin-bottom: 30px;
   color: #333;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-container {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .form-group {

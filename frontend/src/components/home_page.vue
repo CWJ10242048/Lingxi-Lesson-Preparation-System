@@ -4,6 +4,7 @@
     <header class="header">
       <img class="logo" src="../assets/images/linxilogo.png" alt="lingxiTeach logo">
       <div class="header-buttons">
+        <span class="timestamp">{{ currentTime }}</span>
         <router-link to="/login" class="login-button">登录</router-link>
         <button class="new-conversation"><i class="fas fa-plus"></i> 设置</button>
       </div>
@@ -15,15 +16,19 @@
       <!-- 左侧导航栏 -->
       <nav class="sidebar">
         <router-link to="/HomePage" class="nav-item">
+          <img src="https://img.icons8.com/small/16/school.png" alt="主页" width="24" height="24">
           <i class="fas fa-history"></i>主页
         </router-link>
         <router-link to="/HistoryPage" class="nav-item">
+          <img src="https://img.icons8.com/small/16/information.png" alt="输出历史" width="24" height="24">
           <i class="fas fa-history"></i>输出历史
         </router-link>
         <router-link to="/CollaborationSpace" class="nav-item">
+          <img src="https://img.icons8.com/small/96/news.png" alt="协作空间" width="24" height="24">
           <i class="fas fa-users"></i>协作空间
         </router-link>
         <div class="nav-item" @click="navigateToPersonalCenter">
+          <img src="https://img.icons8.com/small/96/user-male-circle.png" alt="个人中心" width="24" height="24">
           <i class="fas fa-user"></i>个人中心
         </div>
       </nav>
@@ -35,15 +40,15 @@
           <section class="card">
             <h2>教学助手</h2>
             <div class="features">
-              <div class="feature" @click="openLessonPlanModal">
-                <i class="fas fa-book" style="color: #2196F3;"></i>
-                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/document-folder.svg" alt="教案生成" width="24" height="24">
-                教案生成
-              </div>
               <div class="feature" @click="navigateToSyllabusGeneration">
                 <i class="fas fa-book" style="color: #2196F3;"></i>
                 <img src="https://birdflock.unipus.cn/static/aigc/find/icon/doc-detail.svg" alt="教学大纲生成" width="24" height="24">
                 教学大纲生成
+              </div>
+              <div class="feature" @click="openLessonPlanModal">
+                <i class="fas fa-book" style="color: #2196F3;"></i>
+                <img src="https://birdflock.unipus.cn/static/aigc/find/icon/document-folder.svg" alt="教案生成" width="24" height="24">
+                教案生成
               </div>
               <div class="feature" @click="navigateToInteractionDesign">
                 <i class="fas fa-lightbulb" style="color: #2196F3;"></i>
@@ -192,10 +197,25 @@ export default {
   data() {
     return {
       showLessonPlanModal: false,
-      showPPTGenerateModal: false
+      showPPTGenerateModal: false,
+      currentTime: ''
     };
   },
+  mounted() {
+    this.updateTime();
+    setInterval(this.updateTime, 1000);
+  },
   methods: {
+    updateTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      this.currentTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    },
     openLessonPlanModal() {
       this.$router.push('/LessonPlanGeneration');
     },
@@ -287,6 +307,13 @@ header {
   align-items: center;
 }
 
+.timestamp {
+  color: #1976D2;
+  font-size: 16px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
 .login-button, .new-conversation {
   padding: 10px 20px;
   margin-left: 10px;
@@ -309,7 +336,7 @@ header {
   font-weight: 700;
   margin-top: 10px; /* 减少顶部边距 */
   margin-bottom: -10px; /* 添加底部边距 */
-  margin-left: 170px;
+  margin-left: 160px;
   color: #0D47A1;
 }
 
@@ -327,15 +354,14 @@ header {
 }
 
 .sidebar {
-  width: 160px;
-  background-color: rgba(207, 207, 207, 0.7);
+  width: 200px;
+  background-color: rgb(101, 116, 137);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 80px; /* 与顶部栏对齐 */
-  left: 10px;
-  height: calc(100vh - 80px); /* 调整高度以延伸到屏幕底部 */
+  top: 80px;
+  left: 0px;
+  height: calc(100vh - 80px);
   overflow-y: auto;
 }
 
@@ -345,7 +371,8 @@ header {
   align-items: center;
   justify-content: center; /* 添加水平居中 */
   margin-bottom: 10px;
-  color: #0D47A1; /* 变深的蓝色 */
+  /* color: #0D47A1; 变深的蓝色 */
+  color: rgb(209, 213, 219);
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.3s;
